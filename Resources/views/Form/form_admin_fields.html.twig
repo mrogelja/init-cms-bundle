@@ -481,10 +481,10 @@ file that was distributed with this source code.
 
     {% if enable %}
         <script type="text/javascript">
-            var CKEDITOR_BASEPATH = '{{ base_path }}';
+            var CKEDITOR_BASEPATH = '/{{ base_path }}';
         </script>
 
-        <script type="text/javascript" src="{{ js_path }}"></script>
+        <script type="text/javascript" src="/{{ js_path }}"></script>
 
         <script type="text/javascript">
             if (CKEDITOR.instances['{{ id }}']) {
@@ -493,7 +493,9 @@ file that was distributed with this source code.
             {% for plugin_name, plugin in plugins %}
                 CKEDITOR.plugins.addExternal('{{ plugin_name }}', '{{ plugin.path }}', '{{ plugin.filename }}');
             {% endfor %}
-            var config = JSON.parse('{{ config | raw }}');
+
+            var config = JSON.parse('{{ config | json_encode | raw }}');
+
             config.language = '{{ app.request.locale }}';
             CKEDITOR.replace('{{ id }}', config);
         </script>
