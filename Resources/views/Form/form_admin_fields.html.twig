@@ -277,13 +277,16 @@ file that was distributed with this source code.
             {% else %}
                 {% block label %}
                     {% if sonata_admin.field_description.options.name is defined %}
-                        {% if label_render %}
+                        {#
+                            label_render is default set to false since this bugfix https://github.com/sonata-project/SonataAdminBundle/commit/18ae1b5f1af72ab8a7f9ab42dcb46f48e05c982d
+                        #}
+                        {#{% if label_render %}#}
                             {{ form_label(form, sonata_admin.field_description.options.name, { 'attr' : {'class' : 'control-label'} }) }}
-                        {% endif %}
+                        {#{% endif %}#}
                     {% else %}
-                        {% if label_render %}
+                        {#{% if label_render %}#}
                             {{ form_label(form, label|default(null), { 'attr' : {'class' : 'control-label'} }) }}
-                        {% endif %}
+                        {#{% endif %}#}
                     {% endif %}
                 {% endblock %}
             {% endif %}
